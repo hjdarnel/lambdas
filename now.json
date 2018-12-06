@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "name": "lambda",
+    "alias": "lambda.darnell.io",
+    "builds": [
+        { "src": "*.js", "use": "@now/node" }
+    ]
+}
