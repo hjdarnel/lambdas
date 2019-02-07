@@ -4,5 +4,8 @@
     "alias": "lambda.darnell.io",
     "builds": [
         { "src": "*.js", "use": "@now/node" }
-    ]
+    ],
+    "github": {
+        "silent": true
+    }
 }
