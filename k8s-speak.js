@@ -8,7 +8,7 @@ const k8ize = (tokens) => {
     return tokens.map((word) => {
         let punctuation = "";
 
-        const replaced = word.replace(/[\!\?\.]/g, (match) => {
+        const replaced = word.replace(/[\!\?\.\,]/g, (match) => {
             punctuation = `${punctuation}${match}`;
             return ""
         });
