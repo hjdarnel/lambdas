@@ -1,13 +1,16 @@
 const { parse } = require("url");
 
 const alphanumerize = (tokens) => {
-    return tokens.map((word) => word.replace(/[^0-9a-zA-Z\.\!\?]/g, ""));
+    return tokens.map((word) => word.replace(/[^0-9a-zA-Z\.\!\?:]/g, ""));
 };
 
 const k8ize = (tokens) => {
     return tokens.map((word) => {
-        let punctuation = "";
+        if (/:.+:/g.test(word)) {
+            return word;
+        }
 
+        let punctuation = "";
         const replaced = word.replace(/[\!\?\.\,]/g, (match) => {
             punctuation = `${punctuation}${match}`;
             return ""
@@ -27,8 +30,9 @@ const k8ize = (tokens) => {
 };
 
 module.exports = (req, res) => {
-    const { query } = parse(req.url, true);
-    let text = "Pass in a value!";;
+    const { query, user_name} = parse(req.url, true);
+    let text = "Pass in a value!";
+    let response_type = "ephemeral";
 
     if (query.text) {
         const tokens = query.text.split(' ');
@@ -37,11 +41,12 @@ module.exports = (req, res) => {
         const bareWords = k8ize(stripped);
 
         text = bareWords.join(' ');
+        response_type = "in_channel";
     }
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
-        response_type: "in_channel",
+        response_type: response_type,
         text
     }));
 };
