@@ -1,7 +1,7 @@
 const { parse } = require("url");
 
 const alphanumerize = (tokens) => {
-    return tokens.map((word) => word.replace(/[^0-9a-zA-Z\.\!\?:]/g, ""));
+    return tokens.map((word) => word.replace(/[^0-9a-zA-Z\-_\.,\!\?:]/g, ""));
 };
 
 const k8ize = (tokens) => {
@@ -11,13 +11,12 @@ const k8ize = (tokens) => {
         }
 
         let punctuation = "";
-        const replaced = word.replace(/[\!\?\.\,]/g, (match) => {
+        const replaced = word.replace(/[\!\?\.,:]/g, (match) => {
             punctuation = `${punctuation}${match}`;
             return ""
         });
 
         const length = replaced.length - 2;
-        console.log(replaced);
 
         if (length > 0) {
             const first = replaced.slice(0, 1);
@@ -30,13 +29,13 @@ const k8ize = (tokens) => {
 };
 
 module.exports = (req, res) => {
-    const { query, user_name} = parse(req.url, true);
+    const { query } = parse(req.url, true);
     let text = "Pass in a value!";
     let response_type = "ephemeral";
 
     if (query.text) {
-        const tokens = query.text.split(' ');
-
+        const tokens = query.text.split(/[\s]+/g);
+        console.log(query.text);
         const stripped = alphanumerize(tokens);
         const bareWords = k8ize(stripped);
 
