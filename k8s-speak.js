@@ -16,7 +16,7 @@ const k8ize = (tokens) => {
         const length = replaced.length - 2;
         console.log(replaced);
 
-        if (length > 1) {
+        if (length > 0) {
             const first = replaced.slice(0, 1);
             const last = replaced.slice(-1);
             return `${first}${length}${last}${punctuation}`;
