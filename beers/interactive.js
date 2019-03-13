@@ -176,6 +176,12 @@ const updateMessage = async ({beerData, response_url, prettyLocation, location, 
 
 
 module.exports = async (req, res) => {
+    if (!SLACK_TOKEN || !UPTOWN_API_KEY || !DOWNTOWN_API_KEY) {
+        console.log('No API key');
+        res.writeHead(500);
+        res.end("No API key");
+        process.exit(0);
+    }
     if (req.method === 'POST') {
         let formBody = '';
 
