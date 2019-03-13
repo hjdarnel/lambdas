@@ -1,4 +1,4 @@
-require('dotenv-safe').config();
+require('dotenv').config();
 const SLACK_TOKEN = process.env.SLACK_TOKEN;
 const UPTOWN_API_KEY = process.env.UPTOWN_API_KEY;
 const DOWNTOWN_API_KEY = process.env.DOWNTOWN_API_KEY;
