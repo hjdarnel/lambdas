@@ -8,13 +8,13 @@ const axios = require('axios');
 
 const api = axios.create({
     baseURL: 'https://api.apify.com/v1/3mCu57Cd75TfADp2i/crawlers/',
-    timeout: 5000
+    timeout: 10000
 });
 
 const slack = axios.create({
     baseURL: 'https://slack.com/api/',
     headers: {'Authorization': `Bearer ${SLACK_TOKEN}`},
-    timeout: 5000
+    timeout: 10000
 });
 
 const getBeers = async (location) => {
