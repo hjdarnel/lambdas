@@ -3,9 +3,16 @@
     "name": "lambda",
     "alias": "lambda.darnell.io",
     "builds": [
-        { "src": "*.js", "use": "@now/node" }
+        { "src": "*.js", "use": "@now/node" },
+        { "src": "beers/command.js", "use": "@now/node" },
+        { "src": "beers/interactive.js", "use": "@now/node" }
     ],
     "github": {
         "silent": true
+    },
+    "env": {
+        "SLACK_TOKEN": "@beer_slack_token",
+        "UPTOWN_API_KEY": "@uptown-api-key",
+        "DOWNTOWN_API_KEY": "@downtown-api-key"
     }
 }
