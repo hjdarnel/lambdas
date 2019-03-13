@@ -4,8 +4,7 @@
     "alias": "lambda.darnell.io",
     "builds": [
         { "src": "*.js", "use": "@now/node" },
-        { "src": "beers/command.js", "use": "@now/node" },
-        { "src": "beers/interactive.js", "use": "@now/node" }
+        { "src": "beers/*.js", "use": "@now/node" }
     ],
     "github": {
         "silent": true
