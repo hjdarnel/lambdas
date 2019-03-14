@@ -5,7 +5,8 @@
   "scripts": {
     "start:k8s": "micro-dev ./k8s-speak.js",
     "start:command": "micro-dev ./beers/command.js",
-    "start:interactive": "micro-dev -p 3001 ./beers/interactive.js"
+    "start:interactive": "micro-dev -p 3000 ./beers/interactive.js",
+    "start:beers": "micro-dev -p 3001 ./beers/formatBeers.js"
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,11 @@
   "homepage": "https://github.com/hjdarnel/lambdas#readme",
   "devDependencies": {
     "dotenv": "7.0.0",
-    "micro": "9.3.3",
     "micro-dev": "3.0.0"
   },
   "dependencies": {
-    "axios": "0.18.0"
+    "axios": "0.18.0",
+    "micro": "9.3.3",
+    "urlencoded-body-parser": "2.0.1"
   }
 }
