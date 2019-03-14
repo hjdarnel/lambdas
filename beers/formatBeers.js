@@ -181,30 +181,44 @@ const updateMessage = async ({beerData, response_url, prettyLocation, location, 
 
 
 module.exports = async (req, res) => {
+    console.log('format these beers');
     if (!SLACK_TOKEN || !UPTOWN_API_KEY || !DOWNTOWN_API_KEY) {
         console.log('No API key');
         res.writeHead(500);
         res.end("No API key");
         process.exit(0);
-    }
+    } else {
+        const body = await json(req).catch(() => {
+            res.writeHead(400);
+            res.end("Bad JSON");
+        });
+        console.log(body);
 
-
-    const payload = (await json(req)).payload;
-
-    if (payload.actions[0].block_id === "select_location") {
-        const beerData = await getBeers(payload.actions[0].selected_option.value);
-        await updateMessage({beerData, response_url: payload.response_url, prettyLocation: payload.actions[0].selected_option.text.text, location: payload.actions[0].selected_option.value});
-    }
-    if (payload.actions[0].block_id === "more_beer") {
-        const params = payload.actions[0].value.split("_");
-        const [action, prettyLocation, location] = params;
-
-        if (action === "share") {
-            const beerData = await getBeers(location);
-            await updateMessage({beerData, response_url: payload.response_url, prettyLocation, location, response_type: "in_channel"});
+        if (!body || !body) {
+            res.writeHead(400);
+            res.end("No payload");
         } else {
-            const beerData = await getBeers(location);
-            await updateMessage({beerData, response_url: payload.response_url, prettyLocation, location, amount: 999});
+            const payload = body;
+            if (payload.actions[0].block_id === "select_location") {
+                const beerData = await getBeers(payload.actions[0].selected_option.value);
+                await updateMessage({beerData, response_url: payload.response_url, prettyLocation: payload.actions[0].selected_option.text.text, location: payload.actions[0].selected_option.value});
+            }
+
+            if (payload.actions[0].block_id === "more_beer") {
+                const params = payload.actions[0].value.split("_");
+                const [action, prettyLocation, location] = params;
+
+                if (action === "share") {
+                    const beerData = await getBeers(location);
+                    await updateMessage({beerData, response_url: payload.response_url, prettyLocation, location, response_type: "in_channel"});
+                } else {
+                    const beerData = await getBeers(location);
+                    await updateMessage({beerData, response_url: payload.response_url, prettyLocation, location, amount: 999});
+                }
+            }
+
+            res.writeHead(200);
+            res.end("OK");
         }
     }
 };
