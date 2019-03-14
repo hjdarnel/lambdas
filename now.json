@@ -6,6 +6,11 @@
         { "src": "*.js", "use": "@now/node" },
         { "src": "beers/*.js", "use": "@now/node" }
     ],
+    "routes": [
+        { "src": "/beers/interactive", "dest": "/beers/interactive.js" },
+        { "src": "/beers/command", "dest": "/beers/command.js" },
+        { "src": "/beers/formatBeers.js", "dest": "/beers/formatBeers.js" }
+    ],
     "github": {
         "silent": true
     },

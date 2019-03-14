@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
                 res.end("No payload");
             }
 
-            axios.post("https://lambda.darnell.io/beers/formatBeers.js", payload);
+            await axios.post("https://lambda.darnell.io/beers/formatBeers.js", payload);
 
             res.writeHead(200);
             res.end();
