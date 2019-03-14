@@ -2,36 +2,36 @@ const { parse } = require('querystring');
 
 const response = [
     {
-        "type": "section",
-        "block_id": "select_location",
-        "text": {
-            "type": "mrkdwn",
-            "text": "Pick a location from the dropdown list"
+        type: 'section',
+        block_id: 'select_location',
+        text: {
+            type: 'mrkdwn',
+            text: 'Pick a location from the dropdown list'
         },
-        "accessory": {
-            "action_id": "section734454127",
-            "type": "static_select",
-            "placeholder": {
-                "type": "plain_text",
-                "text": "Select a taproom",
-                "emoji": true
+        accessory: {
+            action_id: 'section734454127',
+            type: 'static_select',
+            placeholder: {
+                type: 'plain_text',
+                text: 'Select a taproom',
+                emoji: true
             },
-            "options": [
+            options: [
                 {
-                    "text": {
-                        "type": "plain_text",
-                        "text": "Puritan Uptown",
-                        "emoji": true
+                    text: {
+                        type: 'plain_text',
+                        text: 'Puritan Uptown',
+                        emoji: true
                     },
-                    "value": "uptown"
+                    value: 'uptown'
                 },
                 {
-                    "text": {
-                        "type": "plain_text",
-                        "text": "Puritan Downtown",
-                        "emoji": true
+                    text: {
+                        type: 'plain_text',
+                        text: 'Puritan Downtown',
+                        emoji: true
                     },
-                    "value": "downtown"
+                    value: 'downtown'
                 }
             ]
         }
@@ -47,14 +47,16 @@ module.exports = async (req, res) => {
         });
 
         req.on('end', () => {
-            body = parse(formBody)
+            body = parse(formBody);
 
             res.writeHead(200, { 'Content-Type': 'application/json' });
 
-            res.end(JSON.stringify({
-                response_type: "ephemeral",
-                blocks: response
-            }));
+            res.end(
+                JSON.stringify({
+                    response_type: 'ephemeral',
+                    blocks: response
+                })
+            );
         });
     }
 };
