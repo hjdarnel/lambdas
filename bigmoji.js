@@ -46,7 +46,8 @@ const respond = async (req, res) => {
         res.writeHead(400);
         res.end('Invalid request');
     } else if (!input) {
-        return 'No emoji provided!';
+        res.writeHead(200);
+        res.end('No emoji provided!');
     } else {
         try {
             const emojis = await getEmoji(input);
@@ -54,15 +55,18 @@ const respond = async (req, res) => {
             const text = emojis.map((emoji) => `${emoji.emoji}: ${emoji.url}`).join("\n");
 
             if (emojis) {
-                return {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
                     response_type: 'ephemeral',
                     text
-                };
+                }));
             } else {
-                return {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({
                     response_type: 'ephemeral',
                     text: `${input} not found. Perhaps it's a default emoji?`
-                };
+                }));
+
             }
 
         } catch (e) {
