@@ -75,12 +75,10 @@ const getEmoji = async query => {
     const { data: { emoji } } = await slack.get('https://slack.com/api/emoji.list');
 
     const parsed = query.replace(/:/g, '');
-    console.log(parsed);
     const input = parsed.split(' ');
 
     const response = [];
     input.map((element) => {
-        console.log(element);
 
         response.push({
             emoji: element,
