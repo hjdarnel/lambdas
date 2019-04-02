@@ -17,6 +17,7 @@
     "env": {
         "SLACK_TOKEN": "@beer_slack_token",
         "UPTOWN_API_KEY": "@uptown-api-key",
-        "DOWNTOWN_API_KEY": "@downtown-api-key"
+        "DOWNTOWN_API_KEY": "@downtown-api-key",
+        "PERSONAL_SLACK": "@personal-slack"
     }
 }
