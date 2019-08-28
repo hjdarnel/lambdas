@@ -1,9 +1,9 @@
-const { parse } = require("url");
+const parse = require('urlencoded-body-parser');
 
-module.exports = (req, res) => {
-    const { query } = parse(req.url, true);
-    const { text = "Use query 'text'" } = query;
-    const [ who, what, ...rest] = text.split(' ');
+module.exports = async (req, res) => {
+    const { text } = await parse(req);
+
+    const [ who, what = ":blank:", ...rest] = text.split(' ');
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
         response_type: "in_channel",

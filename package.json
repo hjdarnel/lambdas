@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "start:k8s": "micro-dev ./k8s-speak.js",
+    "start:think": "micro-dev ./think-bubble.js",
     "start:command": "micro-dev ./beers/command.js",
     "start:interactive": "micro-dev -p 3000 ./beers/interactive.js",
     "start:beers": "micro-dev -p 3001 ./beers/formatBeers.js",
