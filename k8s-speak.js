@@ -1,4 +1,4 @@
-const { parse } = require("url");
+const parse = require('urlencoded-body-parser');
 
 const alphanumerize = (tokens) => {
     return tokens.map((word) => word.replace(/[^0-9a-zA-Z\-_\.,\!\?:]/g, ""));
@@ -28,8 +28,8 @@ const k8ize = (tokens) => {
     })
 };
 
-module.exports = (req, res) => {
-    const { query } = parse(req.url, true);
+module.exports = async (req, res) => {
+    const query = await parse(req);
     let text = "Pass in a value!";
     let response_type = "ephemeral";
 
