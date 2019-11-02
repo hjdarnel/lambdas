@@ -5,9 +5,6 @@
   "scripts": {
     "start:k8s": "micro-dev ./k8s-speak.js",
     "start:think": "micro-dev ./think-bubble.js",
-    "start:command": "micro-dev ./beers/command.js",
-    "start:interactive": "micro-dev -p 3000 ./beers/interactive.js",
-    "start:beers": "micro-dev -p 3001 ./beers/formatBeers.js",
     "start:bigmoji": "micro-dev ./bigmoji.js"
   },
   "repository": {
@@ -28,6 +25,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "micro": "9.3.3",
+    "node-fetch": "^2.6.0",
     "urlencoded-body-parser": "2.0.1"
   }
 }

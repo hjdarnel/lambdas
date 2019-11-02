@@ -1,8 +1,8 @@
-const { parse } = require("url");
+const parse = require('urlencoded-body-parser');
 
-module.exports = (req, res) => {
-    const { query } = parse(req.url, true);
-    const { text = "Use query 'text'" } = query;
+module.exports = async (req, res) => {
+    const { text } = await parse(req);
+
     const [ who, ...what] = text.split(' ');
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
