@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "start": "micro-dev",
     "start:k8s": "micro-dev ./k8s-speak.js",
     "start:think": "micro-dev ./think-bubble.js",
     "start:bigmoji": "micro-dev ./bigmoji.js"
