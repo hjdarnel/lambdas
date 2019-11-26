@@ -1,4 +1,5 @@
 const parse = require('urlencoded-body-parser');
+const axios = require('axios');
 
 const alphanumerize = (tokens) => {
     return tokens.map((word) => word.replace(/[^0-9a-zA-Z\-_\.,\!\?:]/g, ""));
@@ -30,12 +31,12 @@ const k8ize = (tokens) => {
 
 module.exports = async (req, res) => {
     const query = await parse(req);
-    let text = "Pass in a value!";
+    let text = "Pass in a string!";
     let response_type = "ephemeral";
 
     if (query.text) {
         const tokens = query.text.split(/[\s]+/g);
-        console.log(query.text);
+        console.log(text);
         const stripped = alphanumerize(tokens);
         const bareWords = k8ize(stripped);
 
@@ -43,9 +44,11 @@ module.exports = async (req, res) => {
         response_type = "in_channel";
     }
 
+    await axios.post(query.response_url, {
+        response_type,
+        text: text
+    });
+
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({
-        response_type: response_type,
-        text
-    }));
+    res.end();
 };

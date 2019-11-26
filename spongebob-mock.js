@@ -1,4 +1,5 @@
 const parse = require('urlencoded-body-parser');
+const axios = require('axios');
 
 const alternateCase = function (s) {
     let chars = s.toLowerCase().split("");
@@ -9,11 +10,13 @@ const alternateCase = function (s) {
 };
 
 module.exports = async (req, res) => {
-    const { text } = await parse(req);
+    const { text, response_url } = await parse(req);
+
+    await axios.post(response_url, {
+            response_type: "in_channel",
+            text: `:spongebob-mock: ${alternateCase(text)} :spongebob-mock:`
+    });
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({
-        response_type: "in_channel",
-        text: `:spongebob-mock: ${alternateCase(text)} :spongebob-mock:`
-    }));
+    res.end();
 };
